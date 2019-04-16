@@ -1235,7 +1235,8 @@ export default {
         { rel: 'stylesheet', href: '/css/swipe.min.css' },
       ],
       script: [
-        { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", crossorigin: "anonymous", body: true },
+        // { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", crossorigin: "anonymous", body: true },
+        { src: '/js/jquery-3.3.1.slim.min.js', body: true },
         { src: '/js/vendor/popper.min.js', body: true },
         { src: '/js/swipe.min.js', body: true },
         { src: '/js/bootstrap.min.js', body: true }
