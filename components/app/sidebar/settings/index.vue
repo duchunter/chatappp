@@ -3,13 +3,13 @@
     <div class="settings">
         <!-- Info -->
         <div class="profile">
-            <img class="avatar-xl" src="/img/avatars/avatar-male-1.jpg" alt="avatar">
-            <h1><a href="#">Michael Knudsen</a></h1>
-            <span>Helena, Montana</span>
+            <img class="avatar-xl" src="/img/avatars/avatar.jpg" alt="avatar">
+            <h1><a href="#">Test</a></h1>
+            <span>Hello world</span>
             <div class="stats">
                 <div class="item">
                     <h2>122</h2>
-                    <h3>Fellas</h3>
+                    <h3>Friends</h3>
                 </div>
                 <div class="item">
                     <h2>305</h2>
@@ -56,7 +56,7 @@
 
             <!-- Start of Logout -->
             <div class="category">
-                <a href="sign-in.html" class="title collapsed">
+                <a href="/" class="title collapsed">
                     <i class="material-icons md-30 online">power_settings_new</i>
                     <div class="data">
                         <h5>Power Off</h5>

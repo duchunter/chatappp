@@ -12,8 +12,8 @@
                           <label for="participant">Recipient:</label>
                           <input type="text" class="form-control" id="participant" placeholder="Add recipient..." required>
                           <div class="user" id="recipient">
-                              <img class="avatar-sm" src="/img/avatars/avatar-female-5.jpg" alt="avatar">
-                              <h5>Keith Morris</h5>
+                              <img class="avatar-sm" src="/img/avatars/avatar.jpg" alt="avatar">
+                              <h5>Test</h5>
                               <button class="btn"><i class="material-icons">close</i></button>
                           </div>
                       </div>

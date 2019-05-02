@@ -24,13 +24,13 @@
         <div class="list-group" id="contacts" role="tablist">
           <!-- Online -->
           <a href="#" class="filterMembers all online contact" data-toggle="list">
-              <img class="avatar-md" src="/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
+              <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
               <div class="status">
                   <i class="material-icons online">fiber_manual_record</i>
               </div>
               <div class="data">
-                  <h5>Janette Dalton</h5>
-                  <p>Sofia, Bulgaria</p>
+                  <h5>Test user</h5>
+                  <p>Just came here yesterday</p>
               </div>
               <div class="person-add">
                   <i class="material-icons">person</i>
@@ -39,13 +39,13 @@
 
           <!-- Offline -->
           <a href="#" class="filterMembers all offline contact" data-toggle="list">
-              <img class="avatar-md" src="/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
+              <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
               <div class="status">
                   <i class="material-icons offline">fiber_manual_record</i>
               </div>
               <div class="data">
-                  <h5>Keith Morris</h5>
-                  <p>Chisinau, Moldova</p>
+                  <h5>Test user</h5>
+                  <p>Just came here yesterday</p>
               </div>
               <div class="person-add">
                   <i class="material-icons">person</i>

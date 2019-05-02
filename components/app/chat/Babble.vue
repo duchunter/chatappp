@@ -17,7 +17,7 @@
                       </div>
 
                       <div class="message">
-                          <img class="avatar-md" src="/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
+                          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Test" alt="avatar">
                           <div class="text-main">
                               <div class="text-group">
                                   <div class="text">
@@ -40,14 +40,14 @@
                       </div>
 
                       <div class="message">
-                          <img class="avatar-md" src="/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
+                          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
                           <div class="text-main">
                               <div class="text-group">
                                   <div class="text">
                                       <div class="attachment">
                                           <button class="btn attach"><i class="material-icons md-18">insert_drive_file</i></button>
                                           <div class="file">
-                                              <h5><a href="#">Tenacy Agreement.pdf</a></h5>
+                                              <h5><a href="#">hw.pdf</a></h5>
                                               <span>24kb Document</span>
                                           </div>
                                       </div>
@@ -58,7 +58,7 @@
                       </div>
 
                       <div class="message">
-                          <img class="avatar-md" src="/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
+                          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Test" alt="avatar">
                           <div class="text-main">
                               <div class="text-group">
                                   <div class="text typing">

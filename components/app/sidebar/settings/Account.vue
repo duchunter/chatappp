@@ -12,7 +12,7 @@
           <div class="content">
               <div class="upload">
                   <div class="data">
-                      <img class="avatar-xl" src="/img/avatars/avatar-male-1.jpg" alt="image">
+                      <img class="avatar-xl" src="/img/avatars/avatar.jpg" alt="image">
                       <label>
                           <input type="file">
                           <span class="btn button">Upload avatar</span>

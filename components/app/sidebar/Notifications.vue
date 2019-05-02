@@ -22,23 +22,23 @@
         <h1>Notifications</h1>
         <div class="list-group" id="alerts" role="tablist">
             <a href="#" class="filterNotifications all latest notification" data-toggle="list">
-                <img class="avatar-md" src="/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
+                <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
                 <div class="status">
                     <i class="material-icons online">fiber_manual_record</i>
                 </div>
                 <div class="data">
-                    <p>Janette has accepted your friend request on Swipe.</p>
+                    <p>Test has accepted your friend request.</p>
                     <span>Oct 17, 2018</span>
                 </div>
             </a>
 
             <a href="#" class="filterNotifications all oldest notification" data-toggle="list">
-                <img class="avatar-md" src="/img/avatars/avatar-male-4.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
+                <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
                 <div class="status">
                     <i class="material-icons offline">fiber_manual_record</i>
                 </div>
                 <div class="data">
-                    <p>Mildred has a birthday today. Wish him all the best.</p>
+                    <p>Test has a birthday today. Wish him all the best.</p>
                     <span>Jul 19, 2017</span>
                 </div>
             </a>

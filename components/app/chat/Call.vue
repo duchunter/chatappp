@@ -6,7 +6,7 @@
                   <div class="inside">
                       <div class="panel">
                           <div class="participant">
-                              <img class="avatar-xxl" src="/img/avatars/avatar-female-5.jpg" alt="avatar">
+                              <img class="avatar-xxl" src="/img/avatars/avatar.jpg" alt="avatar">
                               <span>Connecting</span>
                           </div>
                           <div class="options">

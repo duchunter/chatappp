@@ -23,7 +23,7 @@
       <h1>Discussions</h1>
       <div class="list-group" id="chats" role="tablist">
         <a href="#list-chat" class="filterDiscussions all unread single active" id="list-chat-list" data-toggle="list" role="tab">
-          <img class="avatar-md" src="/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
+          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
           <div class="status">
               <i class="material-icons online">fiber_manual_record</i>
           </div>
@@ -31,14 +31,14 @@
               <span>+7</span>
           </div>
           <div class="data">
-              <h5>Janette Dalton</h5>
+              <h5>Test</h5>
               <span>Mon</span>
               <p>A new feature has been updated to your account. Check it out...</p>
           </div>
         </a>
 
         <a href="#list-empty" class="filterDiscussions all unread single" id="list-empty-list" data-toggle="list" role="tab">
-          <img class="avatar-md" src="/img/avatars/avatar-male-1.jpg" data-toggle="tooltip" data-placement="top" title="Michael" alt="avatar">
+          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Michael" alt="avatar">
           <div class="status">
               <i class="material-icons offline">fiber_manual_record</i>
           </div>
@@ -46,21 +46,21 @@
               <span>+10</span>
           </div>
           <div class="data">
-              <h5>Michael Knudsen</h5>
+              <h5>Test</h5>
               <span>Sun</span>
               <p>How can i improve my chances of getting a deposit?</p>
           </div>
         </a>
-        
+
         <a href="#list-chat" class="filterDiscussions all read single" id="list-chat-list2" data-toggle="list" role="tab">
-          <img class="avatar-md" src="/img/avatars/avatar-female-2.jpg" data-toggle="tooltip" data-placement="top" title="Lean" alt="avatar">
+          <img class="avatar-md" src="/img/avatars/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Lean" alt="avatar">
           <div class="status">
               <i class="material-icons offline">fiber_manual_record</i>
           </div>
           <div class="data">
-              <h5>Lean Avent</h5>
+              <h5>Test</h5>
               <span>Tus</span>
-              <p>Hey Chris, could i ask you to help me out with variation...</p>
+              <p>Hey dude, could i ask you to help me out with variation...</p>
           </div>
         </a>
       </div>

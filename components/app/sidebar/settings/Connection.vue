@@ -13,7 +13,7 @@
               <div class="app">
                   <img src="/img/integrations/slack.svg" alt="app">
                   <div class="permissions">
-                      <h5>Skrill</h5>
+                      <h5>Slack</h5>
                       <p>Read, Write, Comment</p>
                   </div>
                   <label class="switch">
