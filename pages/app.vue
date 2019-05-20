@@ -38,6 +38,8 @@ import NewFriend from '~/components/app/modal/NewFriend';
 import NewChat from '~/components/app/modal/NewChat';
 import Babble from '~/components/app/chat/Babble';
 
+import io from 'socket.io-client';
+
 export default {
   components: {
     Navigation,
@@ -61,6 +63,17 @@ export default {
         { src: '/js/bootstrap.min.js', body: true }
       ]
     }
+  },
+
+  mounted() {
+    this.$cookies.set('username', 'test', {
+      path: '/',
+      httpOnly: true,
+      secure: true
+    });
+    // const socket = io('http://localhost:3001');
+    // socket.on('connect', function(){});
+    // socket.on('disconnect', function(){});
   }
 }
 </script>

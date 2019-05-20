@@ -43,6 +43,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
   /*
   ** Axios module configuration
@@ -56,7 +57,7 @@ export default {
   */
   build: {
     transpile: [/^element-ui/],
-    
+
     /*
     ** You can extend webpack config here
     */
