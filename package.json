@@ -20,6 +20,8 @@
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
     "nodemon": "^1.18.9"
   }
 }

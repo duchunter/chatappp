@@ -1,0 +1,54 @@
+.login {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 40px;
+}
+.login-form {
+  width: 290px;
+}
+.forgot-password {
+  margin-top: 10px;
+}
+.login .el-input__inner:hover {
+  border-color: rgb(0, 124, 137);
+}
+.login .el-input__prefix {
+  background: rgb(238, 237, 234);
+  left: 0;
+  height: calc(100% - 2px);
+  left: 1px;
+  top: 1px;
+  border-radius: 3px;
+}
+.login .el-input__prefix .el-input__icon {
+  width: 30px;
+}
+.login .el-input input {
+  padding-left: 35px;
+}
+.login .el-card {
+  padding-top: 0;
+  padding-bottom: 30px;
+}
+h2 {
+  font-family: "Open Sans";
+  letter-spacing: 1px;
+  font-family: Roboto, sans-serif;
+  padding-bottom: 20px;
+}
+a {
+  text-decoration: none;
+}
+.login .el-card {
+  width: 340px;
+  display: flex;
+  justify-content: center;
+}
