@@ -27,5 +27,20 @@ export const mutations = {
 
   SET_NOTIFICATIONS(state, payload) {
     state.notifications = payload;
+  },
+
+  ADD_NEW_MESSAGE(state, message) {
+    let groupIndex = 0;
+    let group = state.groups.find((group, index) => {
+      if (group._id === message.group_id) {
+        groupIndex = index;
+        return true;
+      }
+      return false;
+    });
+    group.messages.unshift(message);
+    let groups = [...state.groups];
+    groups[groupIndex] = group;
+    state.groups = groups;
   }
 };

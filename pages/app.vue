@@ -93,6 +93,11 @@ export default {
         })
       })
     });
+
+    socket.on('chat-message', message => {
+      this.$store.commit('ADD_NEW_MESSAGE', message);
+    });
+
     // socket.on('disconnect', function(){});
   }
 }

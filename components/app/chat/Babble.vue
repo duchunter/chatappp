@@ -16,16 +16,20 @@
 
       <!-- Body -->
       <div
-        id="content"
+        :id="'content' + group"
         class="content"
+        style="overflow: auto"
       >
         <div class="container">
           <div class="col-md-12">
             <div
-              v-for="message in info.messages"
+              v-for="message in [...info.messages].reverse()"
               :key="message._id"
             >
-              <div v-if="message.sender !== userInfo.username" class="message">
+              <div
+                v-if="message.sender !== userInfo.username"
+                class="message"
+              >
                 <img
                   class="avatar-md"
                   src="/img/avatars/avatar.jpg"
@@ -47,7 +51,10 @@
                 </div>
               </div>
 
-              <div v-else class="message me">
+              <div
+                v-else
+                class="message me"
+              >
                 <div class="text-main">
                   <div class="text-group me">
                     <div class="text me">
@@ -73,10 +80,10 @@
           <div class="bottom">
             <form class="position-relative w-100">
               <textarea
+                v-model="message"
                 class="form-control"
                 placeholder="Start typing for reply..."
                 rows="1"
-                v-model="message"
                 @keyup.enter="submit"
               />
               <button class="btn emoticons">
@@ -107,26 +114,52 @@
 import Header from './Header';
 import Call from './Call';
 
+import socket from '~/plugins/socket';
+
 export default {
   components: {
     Header,
     Call
   },
+
   props: ['group', 'info'],
+
   data() {
     return {
       message: ''
     }
   },
+
   computed: {
     friends() {return this.$store.state.friends;},
-    userInfo() {return this.$store.state.userInfo;},
+    userInfo() {return this.$store.state.userInfo;}
   },
+
+  mounted() {
+    this.scrollToEnd();
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'ADD_NEW_MESSAGE') {
+        setTimeout(this.scrollToEnd, 100);
+      }
+    })
+  },
+
   methods: {
     submit(e) {
       e.preventDefault();
-      let message = this.message;
+      let message = {
+        created: Date.now(),
+        group_id: this.group,
+        sender: this.userInfo.username,
+        content: this.message,
+      };
+
       this.message = '';
+      socket.emit('chat-text', { message });
+    },
+    scrollToEnd() {
+      let container = this.$el.querySelector(`#content${this.group}`);
+      container.scrollTop = container.scrollHeight;
     }
   }
 }
