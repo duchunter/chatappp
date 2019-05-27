@@ -23,10 +23,12 @@
           class="tab-content"
         >
           <!-- List of chat window goes here -->
-          <!-- Or you can change only 1 chat window props -->
-          <!-- Start of Babble -->
-          <Babble />
-          <!-- End of Babble -->
+          <Babble
+            v-for="group in groups"
+            :key="group._id"
+            :group="group._id"
+            :info="group"
+          />
         </div>
       </div>
     </div>
@@ -41,9 +43,7 @@ import NewFriend from '~/components/app/modal/NewFriend';
 import NewChat from '~/components/app/modal/NewChat';
 import Babble from '~/components/app/chat/Babble';
 
-import { SERVER } from '~/config'
-
-import io from 'socket.io-client';
+import socket from '~/plugins/socket';
 
 export default {
   components: {
@@ -70,13 +70,29 @@ export default {
     }
   },
 
+  computed: {
+    groups() {return this.$store.state.groups;},
+    friends() {return this.$store.state.friends;},
+  },
+
   mounted() {
     const username = this.$cookies.get('username');
     if (!username) {
       this.$router.push('/');
+      return;
     }
-    // const socket = io('http://localhost:3001');
-    // socket.on('connect', function(){});
+
+    socket.on('connect', () => {
+      socket.emit('user-connected', { username }, (data) => {
+        let { username, name, avatar, friends, notifications, groups } = data;
+        this.$store.commit('SET_ALL_INFO', {
+          friends,
+          groups,
+          notifications,
+          userInfo: { username, name, avatar }
+        })
+      })
+    });
     // socket.on('disconnect', function(){});
   }
 }
