@@ -5,7 +5,7 @@
         <div class="no-messages request">
           <a href="#"><img
             class="avatar-xl"
-            src="/img/avatars/avatar.jpg"
+            src="/img/avatars/avatar.png"
             data-toggle="tooltip"
             data-placement="top"
             title="Test"

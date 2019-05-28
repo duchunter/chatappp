@@ -39,8 +39,48 @@ export const mutations = {
       return false;
     });
     group.messages.unshift(message);
+
     let groups = [...state.groups];
     groups[groupIndex] = group;
     state.groups = groups;
-  }
+  },
+
+  UPDATE_FRIEND_STATUS(state, { username, active }) {
+    if (username === state.userInfo.username) {
+      return;
+    }
+
+    let friendIndex = 0;
+    let friend = state.friends.find((user, index) => {
+      if (user.username === username) {
+        friendIndex = index;
+        return true;
+      }
+      return false;
+    });
+
+    if (friend) {
+      let friends = [...state.friends];
+      friends[friendIndex].active = active;
+      state.friends = friends;
+    }
+  },
+
+  UPDATE_FRIEND_PROFILE(state, { username, name, avatar }) {
+    let friendIndex = 0;
+    let friend = state.friends.find((user, index) => {
+      if (user.username === username) {
+        friendIndex = index;
+        return true;
+      }
+      return false;
+    });
+
+    if (friend) {
+      let friends = [...state.friends];
+      friends[friendIndex].name = name;
+      friends[friendIndex].avatar = avatar;
+      state.friends = friends;
+    }
+  },
 };

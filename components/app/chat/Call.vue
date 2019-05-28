@@ -11,7 +11,7 @@
               <div class="participant">
                 <img
                   class="avatar-xxl"
-                  src="/img/avatars/avatar.jpg"
+                  src="/img/avatars/avatar.png"
                   alt="avatar"
                 >
                 <span>Connecting</span>

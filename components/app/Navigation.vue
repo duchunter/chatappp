@@ -3,13 +3,13 @@
     <div class="container">
       <div class="inside">
         <div class="nav nav-tab menu">
-          <button class="btn">
+          <a href="#settings" data-toggle="tab" class="btn">
             <img
               class="avatar-xl"
-              src="/img/avatars/avatar.jpg"
+              :src="!userInfo.avatar || userInfo.avatar === 'default' ? '/img/avatars/avatar.png' : userInfo.avatar"
               alt="avatar"
             >
-          </button>
+          </a>
           <a
             href="#members"
             data-toggle="tab"
@@ -33,7 +33,7 @@
           ><i class="material-icons">settings</i></a>
           <a
             class="btn power"
-            href="/"
+            @click="logout"
           ><i class="material-icons">power_settings_new</i></a>
         </div>
       </div>
@@ -42,9 +42,21 @@
 </template>
 
 <script>
-export default {
+  import socket from '~/plugins/socket';
 
+  export default {
+    computed: {
+      userInfo() {return this.$store.state.userInfo}
+    },
 
+    methods: {
+      logout(e) {
+        e.preventDefault();
+        socket.emit('log-out');
+        this.$cookies.set('username', null);
+        this.$router.push('/');
+      }
+    }
 }
 </script>
 

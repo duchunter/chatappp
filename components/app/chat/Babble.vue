@@ -32,12 +32,15 @@
               >
                 <img
                   class="avatar-md"
-                  src="/img/avatars/avatar.jpg"
+                  :src="getAvatar(message.sender)"
                   data-toggle="tooltip"
                   data-placement="top"
                   :title="message.sender"
                 >
                 <div class="text-main">
+                  <span>
+                    {{ getSender(message.sender).name }}
+                  </span>
                   <div class="text-group">
                     <div class="text">
                       <p>
@@ -160,6 +163,13 @@ export default {
     scrollToEnd() {
       let container = this.$el.querySelector(`#content${this.group}`);
       container.scrollTop = container.scrollHeight;
+    },
+    getSender(username) {
+      return this.friends.find(user => user.username === username);
+    },
+    getAvatar(username) {
+      let user = this.getSender(username);
+      return !user.avatar || user.avatar === 'default' ? '/img/avatars/avatar.png' : user.avatar
     }
   }
 }

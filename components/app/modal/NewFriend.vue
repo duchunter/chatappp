@@ -39,7 +39,7 @@
               >
                 <img
                   class="avatar-sm"
-                  src="/img/avatars/avatar.jpg"
+                  src="/img/avatars/avatar.png"
                   alt="avatar"
                 >
                 <h5>Test</h5>

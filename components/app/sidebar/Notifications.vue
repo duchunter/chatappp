@@ -20,7 +20,7 @@
         >
           <!--<img-->
           <!--class="avatar-md"-->
-          <!--src="/img/avatars/avatar.jpg"-->
+          <!--src="/img/avatars/avatar.png"-->
           <!--data-toggle="tooltip"-->
           <!--data-placement="top"-->
           <!--title="Janette"-->

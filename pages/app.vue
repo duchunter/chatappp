@@ -98,7 +98,21 @@ export default {
       this.$store.commit('ADD_NEW_MESSAGE', message);
     });
 
-    // socket.on('disconnect', function(){});
+    socket.on('friend-online', username => {
+      this.$store.commit('UPDATE_FRIEND_STATUS', { username, active: true });
+    });
+
+    socket.on('friend-offline', username => {
+      this.$store.commit('UPDATE_FRIEND_STATUS', { username, active: false });
+    });
+
+    socket.on('friend-update-profile', info => {
+      this.$store.commit('UPDATE_FRIEND_PROFILE', info);
+    })
+
+    socket.on('disconnect', () => {
+      this.$message.error('You are disconnected, please check your connection');
+    });
   }
 }
 </script>

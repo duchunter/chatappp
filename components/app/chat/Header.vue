@@ -3,16 +3,16 @@
     <div class="container">
       <div class="col-md-12">
         <div class="inside">
-          <a href="#"><img
-            class="avatar-md"
-            src="/img/avatars/avatar.jpg"
-            data-toggle="tooltip"
-            data-placement="top"
-            title="Test"
-            alt="avatar"
-          ></a>
+          <div class="avatar-md">
+            <h2 style="text-align: center; line-height: 45px;">
+              {{ info.name[0] }}
+            </h2>
+          </div>
           <div class="status">
-            <i class="material-icons online">fiber_manual_record</i>
+            <i
+              class="material-icons"
+              :class="isActive ? 'online' : 'offline'"
+            >fiber_manual_record</i>
           </div>
           <div class="data">
             <h5>
@@ -20,7 +20,9 @@
                 {{ info.name }}
               </a>
             </h5>
-            <span>Active now</span>
+            <span>
+              {{ isActive ? 'Active now' : 'Offline' }}
+            </span>
           </div>
           <button
             class="btn connect d-md-block d-none"
@@ -79,7 +81,16 @@
 
 <script>
 export default {
-  props: ['info']
+  props: ['info'],
+  computed: {
+    friends() {return this.$store.state.friends},
+    isActive() {
+      return this.info.members.some(username => {
+        let friend = this.friends.find(user => user.username === username);
+        return friend && friend.active;
+      })
+    }
+  }
 }
 </script>
 

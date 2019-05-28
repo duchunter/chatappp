@@ -73,11 +73,10 @@
         >
           <img
             class="avatar-md"
-            src="/img/avatars/avatar.jpg"
+            :src="!user.avatar || user.avatar === 'default' ? '/img/avatars/avatar.png' : user.avatar"
             data-toggle="tooltip"
             data-placement="top"
-            title="Janette"
-            alt="avatar"
+            :title="user.username"
           >
           <div class="status">
             <i class="material-icons" :class="user.active ? 'online' : 'offline'">fiber_manual_record</i>

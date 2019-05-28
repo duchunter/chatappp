@@ -46,16 +46,20 @@
           data-toggle="list"
           role="tab"
         >
-          <img
-            class="avatar-md"
-            src="/img/avatars/avatar.jpg"
-            data-toggle="tooltip"
-            data-placement="top"
-            title="Janette"
-            alt="avatar"
-          >
+          <div class="avatar-md">
+            <h2 style="text-align: center; line-height: 45px;">
+              {{ group.name[0] }}
+            </h2>
+          </div>
           <div class="status">
-            <i class="material-icons online">fiber_manual_record</i>
+            <i
+              class="material-icons"
+              :class="
+                group.members.some(username => {
+                  let friend = friends.find(user => user.username === username);
+                  return friend && friend.active;
+                }) ? 'online' : 'offline'"
+            >fiber_manual_record</i>
           </div>
           <div class="data">
             <h5>
