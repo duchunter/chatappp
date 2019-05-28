@@ -2,7 +2,8 @@ export const state = () => ({
   userInfo: {},
   friends: [],
   groups: [],
-  notifications: []
+  notifications: [],
+  selectedGroup: {}
 });
 
 export const mutations = {
@@ -25,8 +26,42 @@ export const mutations = {
     state.groups = payload;
   },
 
+  SET_SELECTED_GROUP(state, group) {
+    state.selectedGroup = group;
+  },
+
+  ADD_GROUP(state, group) {
+    let groups = [...state.groups];
+    groups.unshift(group);
+    state.groups = groups;
+  },
+
+  UPDATE_GROUP(state, group) {
+    let groupIndex = 0;
+    let groups = [...state.groups];
+    let g = groups.find((g, index) => {
+      if (g._id === group._id) {
+        groupIndex = index;
+        return true;
+      }
+      return false;
+    });
+
+    if (g) {
+      groups[groupIndex] = group;
+    }
+
+    state.groups = groups;
+  },
+
   SET_NOTIFICATIONS(state, payload) {
     state.notifications = payload;
+  },
+
+  ADD_NOTIFICATION(state, noti) {
+    let notifications = [...state.notifications];
+    notifications.unshift(noti);
+    state.notifications = notifications;
   },
 
   ADD_NEW_MESSAGE(state, message) {

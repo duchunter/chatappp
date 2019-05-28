@@ -24,52 +24,40 @@
               {{ isActive ? 'Active now' : 'Offline' }}
             </span>
           </div>
-          <button
-            class="btn connect d-md-block d-none"
-            name="1"
-          >
-            <i class="material-icons md-30">phone_in_talk</i>
-          </button>
-          <button
-            class="btn connect d-md-block d-none"
-            name="1"
-          >
-            <i class="material-icons md-36">videocam</i>
-          </button>
-          <button class="btn d-md-block d-none">
-            <i class="material-icons md-30">info</i>
-          </button>
           <div class="dropdown">
             <button
               class="btn"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
+              @click="setSelectedGroup"
             >
               <i class="material-icons md-30">more_vert</i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
               <button
-                class="dropdown-item connect"
-                name="1"
+                data-toggle="modal"
+                data-target="#changegroupname"
+                class="dropdown-item"
               >
-                <i class="material-icons">phone_in_talk</i>Voice Call
+                <i class="material-icons">edit</i>Change group name
               </button>
               <button
-                class="dropdown-item connect"
-                name="1"
+                data-toggle="modal"
+                data-target="#addmember"
+                class="dropdown-item"
               >
-                <i class="material-icons">videocam</i>Video Call
+                <i class="material-icons">account_circle</i>Add member
               </button>
-              <hr>
-              <button class="dropdown-item">
-                <i class="material-icons">clear</i>Clear History
+              <button
+                data-toggle="modal"
+                data-target="#kickmember"
+                class="dropdown-item"
+              >
+                <i class="material-icons">block</i>Kick member
               </button>
-              <button class="dropdown-item">
-                <i class="material-icons">block</i>Block Contact
-              </button>
-              <button class="dropdown-item">
-                <i class="material-icons">delete</i>Delete Contact
+              <button @click="leaveGroup" class="dropdown-item">
+                <i class="material-icons">delete</i>Leave group
               </button>
             </div>
           </div>
@@ -83,12 +71,33 @@
 export default {
   props: ['info'],
   computed: {
+    userInfo() {return this.$store.state.userInfo},
     friends() {return this.$store.state.friends},
     isActive() {
       return this.info.members.some(username => {
         let friend = this.friends.find(user => user.username === username);
         return friend && friend.active;
       })
+    }
+  },
+  methods: {
+    setSelectedGroup(e) {
+      this.$store.commit('SET_SELECTED_GROUP', this.info);
+    },
+
+    leaveGroup(e) {
+      e.preventDefault();
+      const payload = {
+        group_id: this.info._id,
+        username: this.userInfo.username
+      };
+      socket.emit('remove-member', payload, isSuccess => {
+        if (isSuccess) {
+          this.$message.success('Done');
+        } else {
+          this.$message.error('Something went wrong');
+        }
+      });
     }
   }
 }

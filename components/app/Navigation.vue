@@ -23,7 +23,13 @@
             href="#notifications"
             data-toggle="tab"
             class="f-grow1"
-          ><i class="material-icons">notifications_none</i></a>
+            style="position: relative"
+          >
+            <div class="new bg-red">
+              <p v-if="notifications.length > 0">{{notifications.length}}</p>
+            </div>
+            <i class="material-icons">notifications_none</i>
+          </a>
           <button class="btn mode">
             <i class="material-icons">brightness_2</i>
           </button>
@@ -46,7 +52,8 @@
 
   export default {
     computed: {
-      userInfo() {return this.$store.state.userInfo}
+      userInfo() {return this.$store.state.userInfo},
+      notifications() {return this.$store.state.notifications},
     },
 
     methods: {
@@ -61,5 +68,17 @@
 </script>
 
 <style lang="css" scoped>
+  .new {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 20px;
+    min-width: 25px;
+  }
 
+  .new p {
+    padding: 5px;
+    line-height: 15px;
+    color: white;
+  }
 </style>

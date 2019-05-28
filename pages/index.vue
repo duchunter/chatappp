@@ -35,11 +35,12 @@
             Login
           </el-button>
         </el-form-item>
-        <a
+        <nuxt-link
+          to="/register"
           class="forgot-password"
         >
           Don't have an account?
-        </a>
+        </nuxt-link>
       </el-form>
     </el-card>
   </div>

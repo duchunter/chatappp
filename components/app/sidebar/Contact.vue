@@ -58,53 +58,93 @@
     <!-- List -->
     <div class="contacts">
       <h1>Contacts</h1>
-      <div
-        id="contacts"
-        class="list-group"
-        role="tablist"
-      >
-        <a
-          v-for="user in friends"
-          :key="user.username"
-          href="#"
-          class="filterMembers all contact"
-          :class="user.active ? 'online' : 'offline'"
-          data-toggle="list"
+      <div v-if="friends.length > 0">
+        <div
+          id="contacts"
+          class="list-group"
+          role="tablist"
         >
-          <img
-            class="avatar-md"
-            :src="!user.avatar || user.avatar === 'default' ? '/img/avatars/avatar.png' : user.avatar"
-            data-toggle="tooltip"
-            data-placement="top"
-            :title="user.username"
+          <a
+            v-for="user in friends"
+            :key="user.username"
+            href="#"
+            class="filterMembers all contact"
+            :class="user.active ? 'online' : 'offline'"
+            data-toggle="list"
           >
-          <div class="status">
-            <i class="material-icons" :class="user.active ? 'online' : 'offline'">fiber_manual_record</i>
-          </div>
-          <div class="data">
-            <h5>
-              {{user.name}}
-            </h5>
-            <p>
-              {{user.active ? 'Active' : 'Offline'}}
-            </p>
-          </div>
-          <div class="person-add">
-            <i class="material-icons">person</i>
-          </div>
-        </a>
+            <img
+              class="avatar-md"
+              :src="!user.avatar || user.avatar === 'default' ? '/img/avatars/avatar.png' : user.avatar"
+              data-toggle="tooltip"
+              data-placement="top"
+              :title="user.username"
+            >
+            <div class="status">
+              <i class="material-icons" :class="user.active ? 'online' : 'offline'">fiber_manual_record</i>
+            </div>
+            <div class="data">
+              <h5>
+                {{user.name}}
+              </h5>
+              <p>
+                {{user.active ? 'Active' : 'Offline'}}
+              </p>
+            </div>
+            <div class="dropdown">
+              <button
+                class="btn"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="material-icons md-30" style="color: rgb(189, 186, 194)">more_vert</i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item connect">
+                  <i class="material-icons">chat_bubble</i>Send message
+                </button>
+                <button class="dropdown-item connect">
+                  <i class="material-icons">phone_in_talk</i>Voice Call
+                </button>
+                <button class="dropdown-item connect">
+                  <i class="material-icons">videocam</i>Video Call
+                </button>
+                <button @click="unfriend(user.username)" class="dropdown-item">
+                  <i class="material-icons">delete</i>Delete Contact
+                </button>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
+
+      <p v-else style="text-align: center; margin-top: 20px">
+        Nothing here, start by adding some friends
+      </p>
     </div>
     <!-- List end -->
   </div>
 </template>
 
 <script>
-export default {
-  computed: {
-    friends() {return this.$store.state.friends;},
+  import socket from '~/plugins/socket';
+
+  export default {
+    computed: {
+      friends() {return this.$store.state.friends;},
+    },
+    methods: {
+      unfriend(username) {
+        socket.emit('unfriend', { username }, isSuccess => {
+          if (isSuccess) {
+            this.$message.success('Done');
+          } else {
+            this.$message.error('Something went wrong');
+          }
+        });
+      }
+    }
   }
-}
 </script>
 
 <style lang="css" scoped>

@@ -1,15 +1,12 @@
 <template lang="html">
   <div
     :id="`group${group}`"
-    class="babble tab-pane fade active show"
+    class="babble tab-pane fade"
     role="tabpanel"
     aria-labelledby="list-chat-list"
   >
     <!-- Start of Chat -->
-    <div
-      id="chat1"
-      class="chat"
-    >
+    <div class="chat">
       <!-- Header -->
       <Header :info="info" />
       <!-- Header end -->
@@ -89,9 +86,6 @@
                 rows="1"
                 @keyup.enter="submit"
               />
-              <button class="btn emoticons">
-                <i class="material-icons">insert_emoticon</i>
-              </button>
               <button
                 type="submit"
                 class="btn send"
@@ -161,8 +155,13 @@ export default {
       socket.emit('chat-text', { message });
     },
     scrollToEnd() {
+      if (!this.$el) {
+        return;
+      }
       let container = this.$el.querySelector(`#content${this.group}`);
-      container.scrollTop = container.scrollHeight;
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
     },
     getSender(username) {
       return this.friends.find(user => user.username === username);

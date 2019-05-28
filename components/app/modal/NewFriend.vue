@@ -31,32 +31,12 @@
                 type="text"
                 class="form-control"
                 placeholder="Add recipient..."
+                v-model="username"
                 required
               >
-              <div
-                id="contact"
-                class="user"
-              >
-                <img
-                  class="avatar-sm"
-                  src="/img/avatars/avatar.png"
-                  alt="avatar"
-                >
-                <h5>Test</h5>
-                <button class="btn">
-                  <i class="material-icons">close</i>
-                </button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="welcome">Message:</label>
-              <textarea
-                id="welcome"
-                class="text-control"
-                placeholder="Send your welcome message..."
-              >Hi Keith, I'd like to add you as a contact.</textarea>
             </div>
             <button
+              @click="sendRequest"
               type="submit"
               class="btn button w-100"
             >
@@ -70,9 +50,28 @@
 </template>
 
 <script>
-export default {
+  import socket from '~/plugins/socket';
 
-}
+  export default {
+    data() {
+      return {
+        username: ''
+      }
+    },
+
+    methods: {
+      sendRequest(e) {
+        e.preventDefault();
+        socket.emit('add-friend', { receiverUsername: this.username }, isSuccess => {
+          if (isSuccess) {
+            this.$message.success('Request sent');
+          } else {
+            this.$message.error('Something went wrong');
+          }
+        })
+      }
+    }
+  }
 </script>
 
 <style lang="css" scoped>

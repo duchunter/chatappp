@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    id="startnewchat"
+    id="changegroupname"
     class="modal fade"
     tabindex="-1"
     role="dialog"
@@ -12,7 +12,7 @@
     >
       <div class="requests">
         <div class="title">
-          <h1>Start new chat</h1>
+          <h1>Change group name</h1>
           <button
             type="button"
             class="btn"
@@ -25,21 +25,21 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="topic">Topic:</label>
+              <label for="username">Group name:</label>
               <input
-                id="topic"
+                id="username"
                 type="text"
                 class="form-control"
-                placeholder="What's the topic?"
-                v-model="topic"
+                placeholder="Enter new group name"
+                v-model="name"
                 required
               >
             </div>
             <button
-              @click="createGroup"
+              @click="changeName"
               class="btn button w-100"
             >
-              Start New Chat
+              Submit
             </button>
           </form>
         </div>
@@ -54,21 +54,28 @@
   export default {
     data() {
       return {
-        topic: ''
+        name: ''
       }
     },
     computed: {
-      userInfo() {return this.$store.state.userInfo}
+      selectedGroup() {return this.$store.state.selectedGroup}
     },
     methods: {
-      createGroup(e) {
+      changeName(e) {
         e.preventDefault();
-        const group = {
-          name: this.topic,
-          members: [this.userInfo.username]
+        const payload = {
+          group: {
+            ...this.selectedGroup,
+            id: this.selectedGroup._id,
+            name: this.name
+          }
         };
-        socket.emit('create-group-chat', group, () => {
-          this.$message.success('Done');
+        socket.emit('update-group-chat-info', payload, isSuccess => {
+          if (isSuccess) {
+            this.$message.success('Done');
+          } else {
+            this.$message.error('Something went wrong');
+          }
         });
       }
     }

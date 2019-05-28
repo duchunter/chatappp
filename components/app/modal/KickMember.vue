@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    id="startnewchat"
+    id="kickmember"
     class="modal fade"
     tabindex="-1"
     role="dialog"
@@ -12,7 +12,7 @@
     >
       <div class="requests">
         <div class="title">
-          <h1>Start new chat</h1>
+          <h1>Kick a member</h1>
           <button
             type="button"
             class="btn"
@@ -25,21 +25,21 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="topic">Topic:</label>
+              <label for="username">Username:</label>
               <input
-                id="topic"
+                id="username"
                 type="text"
                 class="form-control"
-                placeholder="What's the topic?"
-                v-model="topic"
+                placeholder="Enter user name"
+                v-model="username"
                 required
               >
             </div>
             <button
-              @click="createGroup"
+              @click="kickMember"
               class="btn button w-100"
             >
-              Start New Chat
+              Kick from group
             </button>
           </form>
         </div>
@@ -54,22 +54,15 @@
   export default {
     data() {
       return {
-        topic: ''
+        username: ''
       }
     },
     computed: {
       userInfo() {return this.$store.state.userInfo}
     },
     methods: {
-      createGroup(e) {
+      kickMember(e) {
         e.preventDefault();
-        const group = {
-          name: this.topic,
-          members: [this.userInfo.username]
-        };
-        socket.emit('create-group-chat', group, () => {
-          this.$message.success('Done');
-        });
       }
     }
   }

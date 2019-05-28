@@ -17,6 +17,12 @@
       <NewChat />
       <!-- End of Create Chat -->
 
+      <AddMember/>
+
+      <ChangeGroupName/>
+
+      <KickMember/>
+
       <div class="main">
         <div
           id="nav-tabContent"
@@ -29,6 +35,12 @@
             :group="group._id"
             :info="group"
           />
+
+          <Request
+            v-for="noti in notifications.filter(noti => noti.type === 1)"
+            :key="noti._id"
+            :info="noti"
+          />
         </div>
       </div>
     </div>
@@ -39,9 +51,15 @@
 <script>
 import Navigation from '~/components/app/Navigation';
 import Sidebar from '~/components/app/sidebar';
+
 import NewFriend from '~/components/app/modal/NewFriend';
 import NewChat from '~/components/app/modal/NewChat';
+import ChangeGroupName from '~/components/app/modal/ChangeGroupName';
+import AddMember from '~/components/app/modal/AddMember';
+import KickMember from '~/components/app/modal/KickMember';
+
 import Babble from '~/components/app/chat/Babble';
+import Request from '~/components/app/chat/Request';
 
 import socket from '~/plugins/socket';
 
@@ -51,7 +69,11 @@ export default {
     Sidebar,
     NewFriend,
     NewChat,
-    Babble
+    ChangeGroupName,
+    AddMember,
+    KickMember,
+    Babble,
+    Request
   },
 
   head () {
@@ -62,10 +84,10 @@ export default {
         { rel: 'stylesheet', href: '/css/swipe.min.css' },
       ],
       script: [
-        { src: '/js/jquery-3.3.1.slim.min.js', body: true, defer: true },
-        { src: '/js/vendor/popper.min.js', body: true, defer: true },
-        { src: '/js/swipe.min.js', body: true, defer: true },
-        { src: '/js/bootstrap.min.js', body: true, defer: true }
+        { src: '/js/jquery-3.3.1.slim.min.js', body: true },
+        { src: '/js/vendor/popper.min.js', body: true },
+        { src: '/js/swipe.min.js', body: true },
+        { src: '/js/bootstrap.min.js', body: true }
       ]
     }
   },
@@ -73,6 +95,7 @@ export default {
   computed: {
     groups() {return this.$store.state.groups;},
     friends() {return this.$store.state.friends;},
+    notifications() {return this.$store.state.notifications;},
   },
 
   mounted() {
@@ -108,10 +131,29 @@ export default {
 
     socket.on('friend-update-profile', info => {
       this.$store.commit('UPDATE_FRIEND_PROFILE', info);
-    })
+    });
+
+    socket.on('notification', noti => {
+      this.$store.commit('ADD_NOTIFICATION', noti);
+    });
+
+    socket.on('update-friend-list', friends => {
+      this.$store.commit('SET_FRIENDS', friends);
+    });
+
+    socket.on('new-group-chat', group => {
+      this.$store.commit('ADD_GROUP', group);
+    });
+
+    socket.on('update-group-chat', group => {
+      this.$store.commit('UPDATE_GROUP', group);
+    });
 
     socket.on('disconnect', () => {
-      this.$message.error('You are disconnected, please check your connection');
+      const username = this.$cookies.get('username');
+      if (username) {
+        this.$message.error('You are disconnected, please check your connection');
+      }
     });
   }
 }
