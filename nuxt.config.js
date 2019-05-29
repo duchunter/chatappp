@@ -17,10 +17,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '/js/jquery-3.3.1.slim.min.js', body: true },
-      { src: '/js/vendor/popper.min.js', body: true },
-      { src: '/js/swipe.min.js', body: true },
-      { src: '/js/bootstrap.min.js', body: true }
+      // { src: '/js/jquery-3.3.1.slim.min.js', body: true },
+      // { src: '/js/vendor/popper.min.js', body: true },
+      // { src: '/js/swipe.min.js', body: true },
+      // { src: '/js/bootstrap.min.js', body: true }
     ]
   },
 
