@@ -7,7 +7,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Touch',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,10 +17,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '/js/jquery-3.3.1.slim.min.js', body: true, defer: true },
-      { src: '/js/vendor/popper.min.js', body: true, defer: true },
-      { src: '/js/swipe.min.js', body: true, defer: true },
-      { src: '/js/bootstrap.min.js', body: true, defer: true }
+      { src: '/js/jquery-3.3.1.slim.min.js', body: true },
+      { src: '/js/vendor/popper.min.js', body: true },
+      { src: '/js/swipe.min.js', body: true },
+      { src: '/js/bootstrap.min.js', body: true }
     ]
   },
 
