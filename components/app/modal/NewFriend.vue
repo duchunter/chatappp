@@ -25,20 +25,19 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="user">Username:</label>
+              <label>Username:</label>
               <input
-                id="user"
+                v-model="username"
                 type="text"
                 class="form-control"
                 placeholder="Add recipient..."
-                v-model="username"
                 required
               >
             </div>
             <button
-              @click="sendRequest"
               type="submit"
               class="btn button w-100"
+              @click="sendRequest"
             >
               Send Friend Request
             </button>

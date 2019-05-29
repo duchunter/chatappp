@@ -49,9 +49,16 @@ export const mutations = {
 
     if (g) {
       groups[groupIndex] = group;
+      if (!group.messages) {
+        groups[groupIndex].messages = g.messages;
+      }
     }
 
     state.groups = groups;
+  },
+
+  REMOVE_GROUP(state, groupId) {
+    state.groups = state.groups.filter(group => group._id !== groupId);
   },
 
   SET_NOTIFICATIONS(state, payload) {

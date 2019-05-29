@@ -13,14 +13,15 @@
 
       <!-- Body -->
       <div
-        :id="'content' + group"
+        :id="'content-chat-' + group"
+        ref="content_chat"
         class="content"
         style="overflow: auto"
       >
         <div class="container">
           <div class="col-md-12">
             <div
-              v-for="message in [...info.messages].reverse()"
+              v-for="message in [...info.messages].reverse().filter(msg => msg)"
               :key="message._id"
             >
               <div
@@ -80,7 +81,7 @@
           <div class="bottom">
             <form class="position-relative w-100">
               <textarea
-                v-model="message"
+                v-model="chatMessage"
                 class="form-control"
                 placeholder="Start typing for reply..."
                 rows="1"
@@ -100,30 +101,24 @@
       <!-- Input end -->
     </div>
     <!-- End of Chat -->
-
-    <!-- Start of Call -->
-    <Call />
-    <!-- End of Call -->
   </div>
 </template>
 
 <script>
 import Header from './Header';
-import Call from './Call';
 
 import socket from '~/plugins/socket';
 
 export default {
   components: {
-    Header,
-    Call
+    Header
   },
 
   props: ['group', 'info'],
 
   data() {
     return {
-      message: ''
+      chatMessage: ''
     }
   },
 
@@ -148,24 +143,26 @@ export default {
         created: Date.now(),
         group_id: this.group,
         sender: this.userInfo.username,
-        content: this.message,
+        content: this.chatMessage,
       };
 
-      this.message = '';
+      this.chatMessage = '';
       socket.emit('chat-text', { message });
     },
+
     scrollToEnd() {
-      if (!this.$el) {
-        return;
-      }
-      let container = this.$el.querySelector(`#content${this.group}`);
-      if (container) {
-        container.scrollTop = container.scrollHeight;
+      if (this.$el && this.$el.querySelector) {
+        let container = this.$el.querySelector(`#content-chat-${this.group}`);
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
       }
     },
+
     getSender(username) {
       return this.friends.find(user => user.username === username);
     },
+
     getAvatar(username) {
       let user = this.getSender(username);
       return !user.avatar || user.avatar === 'default' ? '/img/avatars/avatar.png' : user.avatar

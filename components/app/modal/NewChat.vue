@@ -25,19 +25,18 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="topic">Topic:</label>
+              <label>Topic:</label>
               <input
-                id="topic"
+                v-model="topic"
                 type="text"
                 class="form-control"
                 placeholder="What's the topic?"
-                v-model="topic"
                 required
               >
             </div>
             <button
-              @click="createGroup"
               class="btn button w-100"
+              @click="createGroup"
             >
               Start New Chat
             </button>

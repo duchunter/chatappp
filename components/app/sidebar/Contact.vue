@@ -80,14 +80,17 @@
               :title="user.username"
             >
             <div class="status">
-              <i class="material-icons" :class="user.active ? 'online' : 'offline'">fiber_manual_record</i>
+              <i
+                class="material-icons"
+                :class="user.active ? 'online' : 'offline'"
+              >fiber_manual_record</i>
             </div>
             <div class="data">
               <h5>
-                {{user.name}}
+                {{ user.name }}
               </h5>
               <p>
-                {{user.active ? 'Active' : 'Offline'}}
+                {{ user.active ? 'Active' : 'Offline' }}
               </p>
             </div>
             <div class="dropdown">
@@ -97,19 +100,30 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="material-icons md-30" style="color: rgb(189, 186, 194)">more_vert</i>
+                <i
+                  class="material-icons md-30"
+                  style="color: rgb(189, 186, 194)"
+                >more_vert</i>
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item connect">
+                <button
+                  href="#discussions"
+                  data-toggle="tab"
+                  class="dropdown-item"
+                  @click="createChat(user)"
+                >
                   <i class="material-icons">chat_bubble</i>Send message
                 </button>
-                <button class="dropdown-item connect">
+                <!-- <button class="dropdown-item">
                   <i class="material-icons">phone_in_talk</i>Voice Call
                 </button>
-                <button class="dropdown-item connect">
+                <button class="dropdown-item">
                   <i class="material-icons">videocam</i>Video Call
-                </button>
-                <button @click="unfriend(user.username)" class="dropdown-item">
+                </button> -->
+                <button
+                  class="dropdown-item"
+                  @click="unfriend(user.username)"
+                >
                   <i class="material-icons">delete</i>Delete Contact
                 </button>
               </div>
@@ -118,7 +132,10 @@
         </div>
       </div>
 
-      <p v-else style="text-align: center; margin-top: 20px">
+      <p
+        v-else
+        style="text-align: center; margin-top: 20px"
+      >
         Nothing here, start by adding some friends
       </p>
     </div>
@@ -132,8 +149,19 @@
   export default {
     computed: {
       friends() {return this.$store.state.friends;},
+      userInfo() {return this.$store.state.userInfo;}
     },
     methods: {
+      createChat(user) {
+        const group = {
+          name: `${this.userInfo.name} and ${user.name}`,
+          members: [this.userInfo.username, user.username]
+        };
+        socket.emit('create-group-chat', group, () => {
+          this.$message.success('Done');
+        });
+      },
+
       unfriend(username) {
         socket.emit('unfriend', { username }, isSuccess => {
           if (isSuccess) {

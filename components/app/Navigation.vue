@@ -3,7 +3,11 @@
     <div class="container">
       <div class="inside">
         <div class="nav nav-tab menu">
-          <a href="#settings" data-toggle="tab" class="btn">
+          <a
+            href="#settings"
+            data-toggle="tab"
+            class="btn"
+          >
             <img
               class="avatar-xl"
               :src="!userInfo.avatar || userInfo.avatar === 'default' ? '/img/avatars/avatar.png' : userInfo.avatar"
@@ -26,7 +30,7 @@
             style="position: relative"
           >
             <div class="new bg-red">
-              <p v-if="notifications.length > 0">{{notifications.length}}</p>
+              <p v-if="notifications.length > 0">{{ notifications.length }}</p>
             </div>
             <i class="material-icons">notifications_none</i>
           </a>

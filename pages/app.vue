@@ -1,6 +1,9 @@
 <template>
   <main>
-    <div class="layout">
+    <div
+      v-loading="isLoading"
+      class="layout"
+    >
       <!-- Start of Navigation -->
       <Navigation />
       <!-- End of Navigation -->
@@ -17,11 +20,11 @@
       <NewChat />
       <!-- End of Create Chat -->
 
-      <AddMember/>
+      <AddMember />
 
-      <ChangeGroupName/>
+      <ChangeGroupName />
 
-      <KickMember/>
+      <KickMember />
 
       <div class="main">
         <div
@@ -84,11 +87,17 @@ export default {
         { rel: 'stylesheet', href: '/css/swipe.min.css' },
       ],
       script: [
-        { src: '/js/jquery-3.3.1.slim.min.js', body: true },
-        { src: '/js/vendor/popper.min.js', body: true },
-        { src: '/js/swipe.min.js', body: true },
-        { src: '/js/bootstrap.min.js', body: true }
+        // { src: '/js/jquery-3.3.1.slim.min.js', body: true },
+        // { src: '/js/vendor/popper.min.js', body: true },
+        // { src: '/js/swipe.min.js', body: true },
+        // { src: '/js/bootstrap.min.js', body: true }
       ]
+    }
+  },
+
+  data() {
+    return {
+      isLoading: true
     }
   },
 
@@ -99,22 +108,22 @@ export default {
   },
 
   mounted() {
+    this.isLoading = true;
     const username = this.$cookies.get('username');
     if (!username) {
       this.$router.push('/');
       return;
     }
 
-    socket.on('connect', () => {
-      socket.emit('user-connected', { username }, (data) => {
-        let { username, name, avatar, friends, notifications, groups } = data;
-        this.$store.commit('SET_ALL_INFO', {
-          friends,
-          groups,
-          notifications,
-          userInfo: { username, name, avatar }
-        })
-      })
+    socket.emit('user-connected', { username }, (data) => {
+      let { username, name, avatar, friends, notifications, groups } = data;
+      this.$store.commit('SET_ALL_INFO', {
+        friends,
+        groups,
+        notifications,
+        userInfo: { username, name, avatar }
+      });
+      this.isLoading = false;
     });
 
     socket.on('chat-message', message => {
@@ -135,6 +144,9 @@ export default {
 
     socket.on('notification', noti => {
       this.$store.commit('ADD_NOTIFICATION', noti);
+      if (noti.type === 2) {
+        this.$store.commit('REMOVE_GROUP', noti.extra_data);
+      }
     });
 
     socket.on('update-friend-list', friends => {
@@ -147,6 +159,10 @@ export default {
 
     socket.on('update-group-chat', group => {
       this.$store.commit('UPDATE_GROUP', group);
+    });
+
+    socket.on('added-to-group', group => {
+      this.$store.commit('ADD_GROUP', group);
     });
 
     socket.on('disconnect', () => {

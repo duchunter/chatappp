@@ -25,19 +25,18 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="username">Group name:</label>
+              <label>Group name:</label>
               <input
-                id="username"
+                v-model="name"
                 type="text"
                 class="form-control"
                 placeholder="Enter new group name"
-                v-model="name"
                 required
               >
             </div>
             <button
-              @click="changeName"
               class="btn button w-100"
+              @click="changeName"
             >
               Submit
             </button>

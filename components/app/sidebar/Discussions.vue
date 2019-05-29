@@ -56,21 +56,21 @@
               <i
                 class="material-icons"
                 :class="
-                group.members.some(username => {
-                  let friend = friends.find(user => user.username === username);
-                  return friend && friend.active;
-                }) ? 'online' : 'offline'"
+                  group.members.some(username => {
+                    let friend = friends.find(user => user.username === username);
+                    return friend && friend.active;
+                  }) ? 'online' : 'offline'"
               >fiber_manual_record</i>
             </div>
             <div class="data">
               <h5>
                 {{ group.name }}
               </h5>
-              <span v-if="group.messages.length > 0">
+              <span v-if="group.messages && group.messages.length > 0">
                 {{ $moment(group.messages[0].created).fromNow() }}
               </span>
 
-              <p v-if="group.messages.length > 0">
+              <p v-if="group.messages && group.messages.length > 0">
                 {{ group.messages[0].content }}
               </p>
               <p v-else>
@@ -81,7 +81,10 @@
         </div>
       </div>
 
-      <p v-else style="text-align: center; margin-top: 20px">
+      <p
+        v-else
+        style="text-align: center; margin-top: 20px"
+      >
         Nothing here, start by chatting with someone
       </p>
     </div>

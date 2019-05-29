@@ -56,7 +56,10 @@
               >
                 <i class="material-icons">block</i>Kick member
               </button>
-              <button @click="leaveGroup" class="dropdown-item">
+              <button
+                class="dropdown-item"
+                @click="leaveGroup"
+              >
                 <i class="material-icons">delete</i>Leave group
               </button>
             </div>
@@ -68,6 +71,7 @@
 </template>
 
 <script>
+import socket from '~/plugins/socket';
 export default {
   props: ['info'],
   computed: {
@@ -88,12 +92,13 @@ export default {
     leaveGroup(e) {
       e.preventDefault();
       const payload = {
-        group_id: this.info._id,
+        groupId: this.info._id,
         username: this.userInfo.username
       };
       socket.emit('remove-member', payload, isSuccess => {
         if (isSuccess) {
           this.$message.success('Done');
+          this.$store.commit('REMOVE_GROUP', this.info._id);
         } else {
           this.$message.error('Something went wrong');
         }

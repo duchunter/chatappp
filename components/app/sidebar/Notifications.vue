@@ -8,10 +8,10 @@
       <h1>Notifications</h1>
       <div v-if="notifications.length > 0">
         <button
-          @click="clearAllNotifications"
           type="submit"
           class="btn button w-100"
           style="height: 40px; line-height: 40px; padding: 0; margin-bottom: 20px;"
+          @click="clearAllNotifications"
         >
           Clear all
         </button>
@@ -21,7 +21,7 @@
           role="tablist"
         >
           <a
-            v-for="noti in notifications"
+            v-for="noti in notifications.filter(noti => noti && noti._id)"
             :key="noti._id"
             :href="noti.type === 1 ? `#friend-request${noti._id}` : `#friend-request`"
             class="filterNotifications all latest notification"
@@ -38,14 +38,17 @@
             <div class="data">
               <p>{{ noti.content }}</p>
               <span>
-              {{ new Date(noti.created).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}
-            </span>
+                {{ new Date(noti.created).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}
+              </span>
             </div>
           </a>
         </div>
       </div>
 
-      <p v-else style="text-align: center; margin-top: 20px">
+      <p
+        v-else
+        style="text-align: center; margin-top: 20px"
+      >
         Nothing here
       </p>
     </div>

@@ -25,19 +25,18 @@
         <div class="content">
           <form>
             <div class="form-group">
-              <label for="username">Username:</label>
+              <label>Username:</label>
               <input
-                id="username"
+                v-model="username"
                 type="text"
                 class="form-control"
                 placeholder="Enter user name"
-                v-model="username"
                 required
               >
             </div>
             <button
-              @click="addMember"
               class="btn button w-100"
+              @click="addMember"
             >
               Add to group
             </button>
@@ -58,11 +57,22 @@
       }
     },
     computed: {
-      userInfo() {return this.$store.state.userInfo}
+      selectedGroup() {return this.$store.state.selectedGroup}
     },
     methods: {
       addMember(e) {
         e.preventDefault();
+        const payload = {
+          username: this.username,
+          groupId: this.selectedGroup._id
+        };
+        socket.emit('add-member', payload, isSuccess => {
+          if (isSuccess) {
+            this.$message.success('Done');
+          } else {
+            this.$message.error('Something went wrong');
+          }
+        });
       }
     }
   }
