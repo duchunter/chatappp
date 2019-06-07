@@ -87,10 +87,10 @@ export default {
         { rel: 'stylesheet', href: '/css/swipe.min.css' },
       ],
       script: [
-        { src: '/js/jquery-3.3.1.slim.min.js', body: true },
-        { src: '/js/vendor/popper.min.js', body: true },
-        { src: '/js/swipe.min.js', body: true },
-        { src: '/js/bootstrap.min.js', body: true }
+        // { src: '/js/jquery-3.3.1.slim.min.js', body: true },
+        // { src: '/js/vendor/popper.min.js', body: true },
+        { src: '/js/swipe.min.js', body: true, defer: true },
+        // { src: '/js/bootstrap.min.js', body: true }
       ]
     }
   },
