@@ -8,6 +8,7 @@
       <form class="form-inline position-relative">
         <input
           id="people"
+          v-model="search"
           type="search"
           class="form-control"
           placeholder="Search for people..."
@@ -65,7 +66,7 @@
           role="tablist"
         >
           <a
-            v-for="user in friends"
+            v-for="user in friends.filter(user => user.name.toLowerCase().includes(search.toLowerCase()))"
             :key="user.username"
             href="#"
             class="filterMembers all contact"
@@ -147,10 +148,17 @@
   import socket from '~/plugins/socket';
 
   export default {
+    data() {
+      return {
+        search: ''
+      }
+    },
+
     computed: {
       friends() {return this.$store.state.friends;},
       userInfo() {return this.$store.state.userInfo;}
     },
+
     methods: {
       createChat(user) {
         const group = {
