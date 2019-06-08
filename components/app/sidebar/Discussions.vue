@@ -8,6 +8,7 @@
       <form class="form-inline position-relative">
         <input
           id="conversations"
+          v-model="search"
           type="search"
           class="form-control"
           placeholder="Search for conversations..."
@@ -39,7 +40,7 @@
           role="tablist"
         >
           <a
-            v-for="group in groups"
+            v-for="group in groups.filter(group => group.name.toLowerCase().includes(search.toLowerCase()))"
             id="list-chat-list"
             :key="group._id"
             :href="`#group${group._id}`"
@@ -93,6 +94,11 @@
 
 <script>
   export default {
+    data() {
+      return {
+        search: ''
+      }
+    },
     computed: {
       groups() {return this.$store.state.groups;},
       friends() {return this.$store.state.friends;},
